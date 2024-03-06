@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { Youtube_Search_Api } from "../utils/Constants";
 
 const Head = () => {
+  const[searchQuery,setSearchQuery]=useState("");
+
+  const getSearchSuggestions=async()=>{
+    const data=await fetch(Youtube_Search_Api + searchQuery);
+    const json=await data.json();
+    console.log(json)
+
+  }
+ 
+  useEffect(()=>{
+  getSearchSuggestions()
+  },[searchQuery])
+
   const dispatch = useDispatch();
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+ 
+
 
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
@@ -33,6 +49,8 @@ const Head = () => {
           className="w-1/2 border border-gray-400 p-2 rounded-l-full"
           type="text"
           placeholder="Search"
+          value={searchQuery}
+          onChange={(e)=>setSearchQuery(e.target.value)}
         />
         <button className="border border-gray-400 p-2 rounded-r-full">
           🔍
