@@ -8,10 +8,10 @@ const SideBar = () => {
   if(!isMenuOpen)
   return null
   return (
-    <div className='p-5 shadow-lg w-48'>
-     <ul>
+    <div className='p-9 mx-5 shadow-lg '>
+     <ul className="w-50">
      <Link to="/"> <li>Home</li></Link>
-        <li>Shorts</li>
+       <Link to="https://www.youtube.com/results?search_query=shorts"> <li>Shorts</li></Link>
         <li>Videos</li>
         <li>Live</li>
       </ul>

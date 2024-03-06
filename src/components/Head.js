@@ -5,11 +5,14 @@ import { Youtube_Search_Api } from "../utils/Constants";
 
 const Head = () => {
   const[searchQuery,setSearchQuery]=useState("");
+  const[Suggestion,SetSuggestion]=useState([])
+  const[showSuggestion,setShowSuggestion]=useState(false)
 
   const getSearchSuggestions=async()=>{
     const data=await fetch(Youtube_Search_Api + searchQuery);
     const json=await data.json();
-    console.log(json)
+   // console.log(json)
+   SetSuggestion(json[1])
 
   }
  
@@ -45,16 +48,32 @@ const Head = () => {
         </a>
       </div>
       <div className="col-span-10 px-12">
+      <div>
         <input
-          className="w-1/2 border border-gray-400 p-2 rounded-l-full"
+          className="px-5 py-2 w-1/2 border border-gray-400 p-2 rounded-l-full"
           type="text"
           placeholder="Search"
           value={searchQuery}
           onChange={(e)=>setSearchQuery(e.target.value)}
+          onFocus={()=>setShowSuggestion(true)}
+          onBlur={()=>setShowSuggestion(false)}
         />
         <button className="border border-gray-400 p-2 rounded-r-full">
           🔍
         </button>
+        </div>
+       
+        {showSuggestion && (
+          <div className="fixed bg-white py-2 px-2 w-[31rem] shadow-lg rounded-lg border border-gray-100 ">
+          <ul>
+          {Suggestion.map((s)=>{
+            return <li key={s} className=" py-2 px-3 shadow-sm hover:bg-gray-100">🔍  {s}</li>
+          })}
+         </ul>
+        </div>
+        )
+        
+        }
       </div>
       <div className=" col-span-1">
         <img
