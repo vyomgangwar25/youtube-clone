@@ -16,13 +16,13 @@ const Head = () => {
           onClick={() => {
             toggleMenuHandler();
           }}
-          className="h-8 cursor-pointer"
+          className="h-6 cursor-pointer"
           src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"
           alt="hanb"
         />
         <a href="/">
         <img
-          className="h-10 mx-2"
+          className="h-10 mx-3"
           src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
           alt="youtube"
         />
@@ -32,7 +32,7 @@ const Head = () => {
         <input
           className="w-1/2 border border-gray-400 p-2 rounded-l-full"
           type="text"
-          placeholder="enter value"
+          placeholder="Search"
         />
         <button className="border border-gray-400 p-2 rounded-r-full">
           🔍
