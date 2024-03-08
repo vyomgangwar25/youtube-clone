@@ -11,13 +11,19 @@ const Head = () => {
   const getSearchSuggestions=async()=>{
     const data=await fetch(Youtube_Search_Api + searchQuery);
     const json=await data.json();
-   // console.log(json)
+   //console.log(json)
    SetSuggestion(json[1])
 
   }
  
   useEffect(()=>{
-  getSearchSuggestions()
+    const timer=setTimeout(()=>{
+      getSearchSuggestions()
+    },3000)
+    return ()=>{
+       clearTimeout(timer)
+    }
+
   },[searchQuery])
 
   const dispatch = useDispatch();
