@@ -19,7 +19,7 @@ const Head = () => {
   useEffect(()=>{
     const timer=setTimeout(()=>{
       getSearchSuggestions()
-    },3000)
+    },300)
     return ()=>{
        clearTimeout(timer)
     }
