@@ -24,7 +24,7 @@ const VideoContainer = () => {
     const res=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${category}&type=video&key=${Google_Api_key }`)
     const json=await res.json();
     dispatch(setHomeVideo(json.items))
-    console.log(json)
+    //console.log(json)
   }
    
 
@@ -43,7 +43,7 @@ const VideoContainer = () => {
   return (
     <div className='flex flex-wrap'>
     {video.map((data)=>{
-      return <Link to={"/watch?v="+data.id}> <VideoCard key={data.id} info={data}/></Link>
+      return <Link to={"/watch?v="+data.id} key={data.id}> <VideoCard  info={data}/></Link>
       
     })}
      

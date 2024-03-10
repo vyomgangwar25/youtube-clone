@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { toggleMenu } from "../utils/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchSuggestion, toggleMenu } from "../utils/appSlice";
 import { Youtube_Search_Api } from "../utils/Constants";
+import { setcategory } from '../utils/appSlice'
+import { CiSearch } from "react-icons/ci";
 
 const Head = () => {
   const[searchQuery,setSearchQuery]=useState("");
-  const[Suggestion,SetSuggestion]=useState([])
+ //const[Suggestion,SetSuggestion]=useState([])
   const[showSuggestion,setShowSuggestion]=useState(false)
+  const dispatch = useDispatch();
+  const{searchSuggestion}=useSelector((store)=> store.app)
 
   const getSearchSuggestions=async()=>{
     const data=await fetch(Youtube_Search_Api + searchQuery);
     const json=await data.json();
-   console.log(json)
-   SetSuggestion(json[1])
-   console.log(json[1])
+   //console.log(json)
+   //SetSuggestion(json[1])
+   //console.log(json[1])
+   dispatch(setSearchSuggestion(json[1]))
 
   }
  
@@ -27,12 +32,21 @@ const Head = () => {
 
   },[searchQuery])
 
-  const dispatch = useDispatch();
+
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
- 
+
+  const[active,setActive]=useState("All");
+  const videoTag=(tag)=>{
+     
+    
+      setActive(tag);
+      //console.log(active)
+       dispatch(setcategory(tag))
+    
+   }
 
 
   return (
@@ -57,7 +71,7 @@ const Head = () => {
       <div className="col-span-10 px-12  ">
       <div>
         <input
-          className="px-5  py-2 w-1/2 border border-gray-400 p-2 rounded-l-full"
+          className="px-5  py-[10px] w-1/2 border border-gray-400 p-2 rounded-l-full"
           type="text"
           placeholder="Search"
           value={searchQuery}
@@ -65,15 +79,17 @@ const Head = () => {
           onFocus={()=>setShowSuggestion(true)}
           onBlur={()=>setShowSuggestion(false)}
         />
-        <button className="border border-gray-400 p-2 rounded-r-full">
-          🔍
+        <button   onClick={()=>{
+        videoTag(searchQuery)
+      }}  className=" px-3 py-[14px] border border-gray-400 p-2  rounded-r-full">
+          <CiSearch  />
         </button>
         </div>
        
         {showSuggestion && (
           <div className="fixed bg-white py-2 px-2 w-[31rem] shadow-lg rounded-lg border border-gray-100 ">
           <ul>
-          {Suggestion.map((s)=>{
+          {searchSuggestion.map((s)=>{
             return <li key={s} className=" py-2 px-3 shadow-sm hover:bg-gray-100">🔍  {s}</li>
           })}
          </ul>
