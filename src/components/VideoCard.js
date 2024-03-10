@@ -15,7 +15,7 @@ if (!info) {
        <ul>
         <li className='font-bold'>{info.snippet.title}</li>
         <li>{info.snippet.channelTitle}</li>
-        <li>{info.statistics.viewCount}views</li>
+        {/* <li>{info.statistics.viewCount}views</li>  */}
        </ul>
         
     </div>

@@ -4,7 +4,7 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
 const WatchPage = () => {
-  const [searchParams, setSeachParam] = useSearchParams();
+  const [searchParams ] = useSearchParams();
   console.log(searchParams.get("v")); //it will gave the searchId of a video
   const dispatch = useDispatch();
   useEffect(() => {
